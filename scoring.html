@@ -1,1 +1,93 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Scoring</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}body{background:#0e0e0e;color:#fff;max-width:480px;margin:0 auto}.h{padding:12px;background:#111;display:flex;gap:10px;align-items:center}.score{background:#ff2a3c;padding:16px;text-align:center}.score h1{font-size:32px}.b{font-size:12px;opacity:.9}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:16px}.btn{background:#1e1e1e;border:1px solid #333;color:#fff;padding:18px;border-radius:12px;font-size:18px;font-weight:700}.btn.w{background:#ff2a3c}.card{background:#161616;margin:0 16px 12px;border-radius:12px;padding:12px;font-size:13px}.over{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}.ball{width:28px;height:28px;background:#222;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px}</style></head><body><div class="h"><a href="start-match.html" style="color:#fff;text-decoration:none">←</a><b id="t">Scoring</b></div><div class="score"><h1 id="s">0/0</h1><div class="b" id="ov">0.0 Ov • 0 Runs • RR 0.00</div><div class="b" id="teams">ROYALS XI vs KNIGHTS CC</div></div><div class="card"><b>This Over:</b><div class="over" id="thisOver"></div></div><div class="grid"><button class="btn" onclick="add(0)">0</button><button class="btn" onclick="add(1)">1</button><button class="btn" onclick="add(2)">2</button><button class="btn" onclick="add(3)">3</button><button class="btn" onclick="add(4)">4</button><button class="btn" onclick="add(6)">6</button><button class="btn" onclick="add('W')" style="background:#444">W</button><button class="btn w" onclick="add('Wd')">Wd</button><button class="btn w" onclick="add('Nb')">Nb</button><button class="btn" onclick="add('1Wd')">1Wd</button><button class="btn" onclick="undo()">UNDO</button><button class="btn" style="background:#222" onclick="location.href='index.html'">END</button></div><script>let runs=0,wickets=0,balls=0,overBalls=[],hist=[];let teamA=localStorage.getItem('teamA')||'ROYALS XI';let teamB=localStorage.getItem('teamB')||'KNIGHTS CC';document.getElementById('teams').innerText=teamA+' vs '+teamB;function render(){let ov=Math.floor(balls/6)+'.'+(balls%6);let rr=balls? (runs/(balls/6)).toFixed(2):'0.00';document.getElementById('s').innerText=runs+'/'+wickets;document.getElementById('ov').innerText=ov+' Ov • '+runs+' Runs • RR '+rr;document.getElementById('thisOver').innerHTML=overBalls.map(b=>'<div class=ball>'+b+'</div>').join('')}function add(v){hist.push({runs,wickets,balls,over:[...overBalls]});if(v=='W'){wickets++;balls++;overBalls.push('W')}else if(v=='Wd'){runs+=1;overBalls.push('Wd')}else if(v=='Nb'){runs+=1;overBalls.push('Nb')}else if(v=='1Wd'){runs+=2;overBalls.push('1Wd')}else{runs+=v;balls++;overBalls.push(v)}if(balls%6==0&&balls!=0&&typeof v!=='string')overBalls=[];render()}function undo(){if(!hist.length)return;let h=hist.pop();runs=h.runs;wickets=h.wickets;balls=h.balls;overBalls=h.over;render()}render()</script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Scoring - Ayaan Cric</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
+body{background:#0a0a0a;color:#fff;max-width:480px;margin:0 auto;padding:12px}
+.top{display:flex;justify-content:space-between;padding:12px 0;align-items:center}
+.card{background:#161616;border:1px solid #222;border-radius:16px;padding:16px;margin:10px 0;text-align:center}
+.score{font-size:42px;font-weight:800}
+.runs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
+.r{background:#1e1e1e;border:1px solid #333;color:#fff;padding:16px;border-radius:12px;font-weight:700;font-size:18px}
+.r.four{background:#2a1a1a;border-color:#ff2a3c;color:#ff2a3c}
+.r.six{background:#ff2a3c;color:#fff}
+.btn{width:100%;background:#ff2a3c;color:#fff;border:0;padding:14px;border-radius:24px;font-weight:800;margin-top:8px}
+.btn2{background:#222;border:1px solid #333;margin-top:8px}
+.small{font-size:12px;color:#888}
+.badge{background:#222;padding:6px 12px;border-radius:20px;font-size:12px}
+</style>
+</head>
+<body>
+<div class="top"><span onclick="location.href='index.html'">← Home</span><b id="matchTitle">AYAN XI vs Stars</b><span id="overText" class="badge">0.0 ov</span></div>
+
+<div class="card">
+<div class="small" id="strikerName">Striker: Ayaan</div>
+<div class="score"><span id="runs">0</span>/<span id="wkts">0</span></div>
+<div class="small" id="crr">CRR: 0.00 • <span id="ballsText">0 balls</span></div>
+<div class="small" style="margin-top:8px" id="thisOver">This Over: </div>
+</div>
+
+<div class="runs">
+<button class="r" onclick="add(0)">0</button>
+<button class="r" onclick="add(1)">1</button>
+<button class="r" onclick="add(2)">2</button>
+<button class="r" onclick="add(3)">3</button>
+<button class="r four" onclick="add(4)">4</button>
+<button class="r six" onclick="add(6)">6</button>
+<button class="r" onclick="addW()">W</button>
+<button class="r" onclick="addWd()">WD+1</button>
+</div>
+
+<button class="btn" onclick="share()">Share Live Score to WhatsApp 📤</button>
+<button class="btn btn2" onclick="endMatch()">END Match → Save to Home</button>
+<button class="btn btn2" onclick="reset()">Reset 0/0</button>
+
+<script>
+let runs=parseInt(localStorage.getItem('current_runs')||'0');
+let wkts=parseInt(localStorage.getItem('current_wk')||'0');
+let balls=parseInt(localStorage.getItem('current_balls')||'0');
+let overArr=JSON.parse(localStorage.getItem('current_over')||'[]');
+let teamA=localStorage.getItem('teamA')||'AYAN XI';
+let teamB=localStorage.getItem('teamB')||'Mymensingh Stars';
+let players=JSON.parse(localStorage.getItem('teamA_players')||'["Ayaan","Sohel"]');
+document.getElementById('matchTitle').innerText=teamA+' vs '+teamB;
+document.getElementById('strikerName').innerText='Striker: '+(players[0]||'Ayaan')+' • Non-striker: '+(players[1]||'Sohel');
+
+function update(){
+ let ov=Math.floor(balls/6)+'.'+(balls%6);
+ document.getElementById('runs').innerText=runs;
+ document.getElementById('wkts').innerText=wkts;
+ document.getElementById('overText').innerText=ov+' ov';
+ document.getElementById('ballsText').innerText=balls+' balls';
+ document.getElementById('thisOver').innerText='This Over: '+overArr.join(' ');
+ let crr=balls>0?(runs/(balls/6)).toFixed(2):'0.00';
+ document.getElementById('crr').innerHTML='CRR: '+crr+' • <span>'+balls+' balls</span>';
+ localStorage.setItem('current_runs',runs);
+ localStorage.setItem('current_wk',wkts);
+ localStorage.setItem('current_balls',balls);
+ localStorage.setItem('current_over',JSON.stringify(overArr));
+}
+function add(n){runs+=n;balls++;overArr.push(n);if(overArr.length>6)overArr.shift();update();}
+function addW(){wkts++;balls++;overArr.push('W');if(overArr.length>6)overArr.shift();update();}
+function addWd(){runs++;overArr.push('WD');if(overArr.length>6)overArr.shift();update();}
+function reset(){runs=0;wkts=0;balls=0;overArr=[];update();}
+function endMatch(){
+ localStorage.setItem('final_runs',runs);
+ localStorage.setItem('final_wk',wkts);
+ localStorage.setItem('final_balls',balls);
+ localStorage.setItem('final_over',JSON.stringify(overArr));
+ location.href='index.html';
+}
+function share(){
+ let ov=Math.floor(balls/6)+'.'+(balls%6);
+ let txt=`🔴 LIVE - Ayaan Cric\n${teamA} vs ${teamB}\nScore: ${runs}/${wkts} (${ov} ov)\nStriker: ${players[0]||'Ayaan'}\nThis Over: ${overArr.join(' ')}\nWatch live: https://gplexsohel-dotcom.github.io/ayaancric/`;
+ let url='https://wa.me/?text='+encodeURIComponent(txt);
+ window.open(url,'_blank');
+}
+update();
+</script>
+</body>
+</html>
