@@ -6,33 +6,42 @@
 <title>Ayaan Cric</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
-body{background:#0a0a0a;color:#fff;max-width:480px;margin:0 auto}
-.top{display:flex;justify-content:space-between;padding:14px;background:#121212}
-.hello{padding:20px 16px}
-.live{margin:0 16px;background:#171111;border:1.5px solid #ff2a3c;border-radius:20px;padding:18px;text-align:center}
-.btn{background:#ff2a3c;color:#fff;border:0;padding:12px 22px;border-radius:24px;font-weight:700}
-.quick{padding:20px 16px}
-.qa{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
-.q{background:#161616;border:1px solid #222;border-radius:16px;padding:16px 8px;text-align:center}
-.q.a{border-color:#ff2a3c}
-.nav{position:fixed;bottom:0;max-width:480px;width:100%;background:#121212;display:flex;justify-content:space-around;padding:10px 0}
+body{background:#0a0a0a;color:#fff;max-width:480px;margin:0 auto;padding:12px}
+.top{display:flex;justify-content:space-between;padding:12px 0}
+.live{border:1.5px solid #ff2a3c;border-radius:16px;padding:14px;margin:10px 0;background:#111}
+.btn{background:#ff2a3c;color:#fff;border:0;padding:12px;border-radius:20px;width:100%;font-weight:800;margin-top:10px}
+.small{font-size:12px;color:#888}
+.card{background:#161616;border:1px solid #222;border-radius:14px;padding:12px;margin:8px 0}
 </style>
 </head>
 <body>
-<div class="top"><b>Ayaan Cric</b><span>🔔 👤</span></div>
-<div class="hello"><h1>Hello, Ayaan 👋</h1><p>Ready for your next match?</p></div>
-<div class="live"><div style="color:#ff2a3c;font-size:12px;font-weight:800">● LIVE</div><div style="display:flex;justify-content:space-between;margin:14px 0;font-weight:800"><span id="tA">ROYALS XI</span><span>VS</span><span id="tB">KNIGHTS CC</span></div><div id="liveInfo" style="color:#666;font-size:13px;margin-bottom:14px">T20 • Live • 0.0 overs</div><button class="btn" onclick="location.href='scoring.html'">View Live Scoreboard →</button></div>
-<div class="quick"><b>Quick Actions</b><div class="qa"><div class="q a" onclick="location.href='start-match.html'">🏏<br><b>Start Match</b></div><div class="q">🏆<br><b>Trophy</b></div><div class="q" onclick="location.href='scorecard.html'">📊<br><b>Stats</b></div></div></div>
+<div class="top"><b>Ayaan Cric</b><span>🔴 LIVE</span></div>
+
+<div class="live">
+<div class="small" style="color:#ff2a3c">● LIVE • Mymensingh</div>
+<b id="teamNames">AYAN XI vs Mymensingh Stars</b>
+<h1 style="font-size:32px;margin:8px 0"><span id="hRuns">0</span>/<span id="hWk">0</span> (<span id="hOv">0.0</span> ov)</h1>
+<div class="small" id="hInfo">CRR: 0.00 • Tap View to Score</div>
+<button class="btn" onclick="location.href='scoring.html'">View Live Scoreboard →</button>
+</div>
+
+<div style="display:flex;gap:8px">
+<div class="card" style="flex:1;text-align:center" onclick="location.href='start-match.html'">▶ Start<br><span class="small">New Match</span></div>
+<div class="card" style="flex:1;text-align:center" onclick="location.href='scoring.html'">🏏 Score<br><span class="small">Live</span></div>
+<div class="card" style="flex:1;text-align:center">📊 History<br><span class="small">Matches</span></div>
+</div>
+
 <script>
-let tA=localStorage.getItem('teamA')||'ROYALS XI';
-let tB=localStorage.getItem('teamB')||'KNIGHTS CC';
-let runs=localStorage.getItem('final_runs')||'98';
-let wkts=localStorage.getItem('final_wk')||'4';
-let balls=parseInt(localStorage.getItem('final_balls')||'72');
-let ov=Math.floor(balls/6)+'.'+(balls%6);
-document.getElementById('tA').innerText=tA;
-document.getElementById('tB').innerText=tB;
-document.getElementById('liveInfo').innerText='T20 • Live • '+ov+' overs • '+runs+'/'+wkts;
+let fr=localStorage.getItem('final_runs')||localStorage.getItem('current_runs')||'0';
+let fw=localStorage.getItem('final_wk')||localStorage.getItem('current_wk')||'0';
+let fb=parseInt(localStorage.getItem('final_balls')||localStorage.getItem('current_balls')||'0');
+let ta=localStorage.getItem('teamA')||'AYAN XI';
+let tb=localStorage.getItem('teamB')||'Mymensingh Stars';
+document.getElementById('teamNames').innerText=ta+' vs '+tb;
+document.getElementById('hRuns').innerText=fr;
+document.getElementById('hWk').innerText=fw;
+document.getElementById('hOv').innerText=Math.floor(fb/6)+'.'+(fb%6);
+document.getElementById('hInfo').innerText='CRR: '+(fb>0?(fr/(fb/6)).toFixed(2):'0.00')+' • '+ta+' Batting';
 </script>
 </body>
 </html>
