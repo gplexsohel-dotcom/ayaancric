@@ -1,19 +1,59 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Start Match - Ayaan Cric</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}body{background:#0a0a0a;color:#fff;max-width:480px;margin:0 auto;padding:14px}.top{padding:10px 0;display:flex;gap:10px;align-items:center}input{width:100%;background:#161616;border:1.5px solid #222;color:#fff;padding:12px;border-radius:10px;margin:6px 0}.card{background:#161616;border:1px solid #222;border-radius:16px;padding:14px;margin:10px 0}.btn{width:100%;background:#ff2a3c;color:#fff;border:0;padding:14px;border-radius:24px;font-weight:800;font-size:16px;margin-top:12px}label{font-size:12px;color:#888}</style></head><body>
-<div class="top"><span onclick="location.href='index.html'">←</span><b>Start New Match</b></div>
-<div class="card"><label>Team A Name</label><input id="teamA" placeholder="ROYALS XI" value="AYAN XI"><label>Team B Name</label><input id="teamB" placeholder="KNIGHTS CC" value="Mymensingh Stars"></div>
-<div class="card"><b>AYAN XI Players (11)</b><input id="p1" value="Ayaan"><input id="p2" value="Sohel"><input id="p3" placeholder="Player 3"><input id="p4" placeholder="Player 4"><input id="p5" placeholder="Player 5"></div>
-<div class="card"><b>Mymensingh Stars Players</b><input id="b1" value="Rahul"><input id="b2" value="Sakib"><input id="b3" placeholder="Player 3"></div>
-<button class="btn" onclick="start()">Start Match → Go to Scoring</button>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Start Match</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
+body{background:#0a0a0a;color:#fff;max-width:480px;margin:0 auto;padding:14px}
+.top{padding:12px 0;display:flex;gap:10px}
+input{width:100%;background:#161616;border:1.5px solid #333;color:#fff;padding:12px;border-radius:10px;margin:6px 0}
+.card{background:#161616;border:1px solid #222;border-radius:16px;padding:14px;margin:12px 0}
+.btn{width:100%;background:#ff2a3c;color:#fff;border:0;padding:14px;border-radius:24px;font-weight:800;font-size:16px;margin-top:10px}
+label{font-size:12px;color:#888}
+b{font-size:14px}
+</style>
+</head>
+<body>
+<div class="top"><span onclick="location.href='index.html'">← Back</span><b>Start New Match</b></div>
+
+<div class="card">
+<label>Team A Name</label>
+<input id="teamA" value="AYAN XI">
+<label>Team B Name</label>
+<input id="teamB" value="Mymensingh Stars">
+</div>
+
+<div class="card">
+<b>AYAN XI Players</b>
+<input id="p1" value="Ayaan">
+<input id="p2" value="Sohel">
+<input id="p3" placeholder="Player 3">
+<input id="p4" placeholder="Player 4">
+<input id="p5" placeholder="Player 5">
+</div>
+
+<div class="card">
+<b>Mymensingh Stars Players</b>
+<input id="b1" value="Rahul">
+<input id="b2" placeholder="Player 2">
+</div>
+
+<button class="btn" onclick="start()">Start Match →</button>
+
 <script>
 function start(){
-let a=document.getElementById('teamA').value||'AYAN XI';
-let b=document.getElementById('teamB').value||'KNIGHTS CC';
-localStorage.setItem('teamA',a);localStorage.setItem('teamB',b);
-let pa=[document.getElementById('p1').value,document.getElementById('p2').value,document.getElementById('p3').value,document.getElementById('p4').value,document.getElementById('p5').value].filter(x=>x);
-localStorage.setItem('teamA_players',JSON.stringify(pa));
-localStorage.setItem('current_runs','0');localStorage.setItem('current_wk','0');localStorage.setItem('current_balls','0');
-localStorage.setItem('current_over','[]');
-location.href='scoring.html';
+ let a=document.getElementById('teamA').value;
+ let b=document.getElementById('teamB').value;
+ localStorage.setItem('teamA',a);
+ localStorage.setItem('teamB',b);
+ localStorage.setItem('current_runs','0');
+ localStorage.setItem('current_wk','0');
+ localStorage.setItem('current_balls','0');
+ localStorage.setItem('current_over','[]');
+ location.href='scoring.html';
 }
 </script>
-</body></html>
+</body>
+</html>
