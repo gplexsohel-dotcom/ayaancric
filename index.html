@@ -1,11 +1,28 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ayaan Cric</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}body{background:#0a0a0a;color:#fff;max-width:480px;margin:0 auto}.top{display:flex;justify-content:space-between;align-items:center;padding:14px;background:#121212;border-bottom:1px solid #222}.ac{width:42px;height:42px;border:2px solid #ff2a3c;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#ff2a3c;font-weight:800}.hello{padding:20px 16px}.hello h1{font-size:26px}.hello p{color:#888;font-size:14px;margin-top:4px}.live{margin:0 16px;background:#171111;border:1.5px solid #ff2a3c;border-radius:20px;padding:18px;text-align:center}.live .dot{color:#ff2a3c;font-size:12px;font-weight:800;letter-spacing:1px}.vs{display:flex;justify-content:space-between;align-items:center;margin:14px 0;font-weight:800}.vs span:nth-child(2){color:#555}.info{color:#666;font-size:13px;margin-bottom:14px}.btn{background:#ff2a3c;color:#fff;border:0;padding:12px 22px;border-radius:24px;font-weight:700}.quick{padding:20px 16px}.qa{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.q{background:#161616;border:1px solid #222;border-radius:16px;padding:16px 8px;text-align:center}.q.a{border-color:#ff2a3c}.q div{font-size:24px}.q b{font-size:12px;display:block;margin-top:6px}.recent{padding:0 16px}.ra{background:#161616;border-radius:14px;padding:14px;display:flex;gap:12px;align-items:center;margin-top:10px}.nav{position:fixed;bottom:0;max-width:480px;width:100%;background:#121212;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #222}.nav div{text-align:center;font-size:10px;color:#666}.nav .on{color:#ff2a3c}</style></head><body>
-<div class="top"><div style="display:flex;align-items:center;gap:10px"><div class="ac">AC</div><b>Ayaan Cric</b></div><div>🔔 👤</div></div>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ayaan Cric</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
+body{background:#0a0a0a;color:#fff;max-width:480px;margin:0 auto}
+.top{display:flex;justify-content:space-between;padding:14px;background:#121212}
+.hello{padding:20px 16px}
+.live{margin:0 16px;background:#171111;border:1.5px solid #ff2a3c;border-radius:20px;padding:18px;text-align:center}
+.btn{background:#ff2a3c;color:#fff;border:0;padding:12px 22px;border-radius:24px;font-weight:700}
+.quick{padding:20px 16px}
+.qa{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.q{background:#161616;border:1px solid #222;border-radius:16px;padding:16px 8px;text-align:center}
+.q.a{border-color:#ff2a3c}
+.nav{position:fixed;bottom:0;max-width:480px;width:100%;background:#121212;display:flex;justify-content:space-around;padding:10px 0}
+</style>
+</head>
+<body>
+<div class="top"><b>Ayaan Cric</b><span>🔔 👤</span></div>
 <div class="hello"><h1>Hello, Ayaan 👋</h1><p>Ready for your next match?</p></div>
-<div class="live"><div class="dot">● LIVE MATCH LIVE</div><div class="vs"><span id="tA">ROYALS XI</span><span>VS</span><span id="tB">KNIGHTS CC</span></div><div class="info" id="liveInfo">T20 • Final • 12 overs • 98/4 (12.0)</div><button class="btn" onclick="location.href='scoring.html'">View Live Scoreboard →</button></div>
-<div class="quick"><b>Quick Actions</b><div class="qa"><div class="q a" onclick="location.href='start-match.html'"><div>🏏</div><b>Start Match</b></div><div class="q"><div>🏆</div><b>Tournaments</b></div><div class="q" onclick="location.href='scorecard.html'"><div>📊</div><b>Statistics</b></div></div></div>
-<div class="recent"><b>Recent Activity</b><div class="ra"><div style="font-size:22px">🏏</div><div><b id="recentText" style="font-size:13px">You scored 42 runs vs Eagles XI</b><div style="font-size:12px;color:#666">Yesterday • Won by 6 wickets</div></div></div></div>
-<div style="height:80px"></div>
-<div class="nav"><div class="on">🏠<br>Home</div><div>👑<br>Privilege PRO</div><div>🏏<br>My Cricket</div><div>📷<br>Go Live</div><div>🔭<br>Looking</div></div>
+<div class="live"><div style="color:#ff2a3c;font-size:12px;font-weight:800">● LIVE</div><div style="display:flex;justify-content:space-between;margin:14px 0;font-weight:800"><span id="tA">ROYALS XI</span><span>VS</span><span id="tB">KNIGHTS CC</span></div><div id="liveInfo" style="color:#666;font-size:13px;margin-bottom:14px">T20 • Live • 0.0 overs</div><button class="btn" onclick="location.href='scoring.html'">View Live Scoreboard →</button></div>
+<div class="quick"><b>Quick Actions</b><div class="qa"><div class="q a" onclick="location.href='start-match.html'">🏏<br><b>Start Match</b></div><div class="q">🏆<br><b>Trophy</b></div><div class="q" onclick="location.href='scorecard.html'">📊<br><b>Stats</b></div></div></div>
 <script>
 let tA=localStorage.getItem('teamA')||'ROYALS XI';
 let tB=localStorage.getItem('teamB')||'KNIGHTS CC';
@@ -15,8 +32,7 @@ let balls=parseInt(localStorage.getItem('final_balls')||'72');
 let ov=Math.floor(balls/6)+'.'+(balls%6);
 document.getElementById('tA').innerText=tA;
 document.getElementById('tB').innerText=tB;
-document.getElementById('liveInfo').innerText='T20 • Live • '+ov+' overs • '+runs+'/'+wkts+' ('+ov+')';
-let cr=localStorage.getItem('final_runs');
-if(cr){document.getElementById('recentText').innerText='You scored '+cr+'/'+wkts+' vs '+tB+' • '+ov+' Ov';}
+document.getElementById('liveInfo').innerText='T20 • Live • '+ov+' overs • '+runs+'/'+wkts;
 </script>
-</body></html>
+</body>
+</html>
