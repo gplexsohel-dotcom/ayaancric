@@ -3,89 +3,71 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ayaan Cric</title>
+<title>Start New Match</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
 body{background:#0c0c0c;display:flex;justify-content:center}
-.app{width:100%;max-width:420px;background:#121212;min-height:100vh;display:flex;flex-direction:column;position:relative}
-.hdr{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#171717;border-bottom:1px solid #222}
-.logo{display:flex;gap:10px;align-items:center;color:#fff;font-weight:800}
-.sh{width:36px;height:36px;border:2px solid #e11a2e;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#e11a2e;font-weight:900;font-size:13px}
-.out{width:34px;height:34px;background:#e11a2e;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;font-weight:800;border:none}
-.hello{padding:12px 16px}
-.hello h2{color:#fff;font-size:20px}
-.hello p{color:#888;font-size:12px;margin-top:2px}
-.card{margin:6px 16px;background:#1e1e1e;padding:10px 14px;border-radius:10px;color:#fff;border:1px solid #2a2a2a}
-.live{color:#e11a2e;font-size:10px;font-weight:700}
-.match{font-size:14px;font-weight:700;margin-top:2px}
-.score{color:#888;font-size:11px;margin-top:2px}
-.content{flex:1;padding-bottom:75px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:10px 16px}
-.box{padding:18px 8px;border-radius:16px;text-align:center;color:#fff;cursor:pointer}
-.box .icon{font-size:32px;display:block;margin-bottom:6px}
-.box .title{font-size:15px;font-weight:800}
-.box .sub{font-size:10px;opacity:.8;margin-top:2px}
-.b1{background:linear-gradient(135deg,#0d7a3a,#00d95f)}
-.b2{background:linear-gradient(135deg,#9b1a2a,#ff2d47)}
-.b3{background:linear-gradient(135deg,#1a4fb5,#3a8bff)}
-.b4{background:linear-gradient(135deg,#9a4a00,#ff8c1a)}
-.bot{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:420px;height:65px;background:#171717;border-top:1px solid #222;display:flex;justify-content:space-around;align-items:center;z-index:100}
-.bot div{color:#666;font-size:10px;text-align:center}
-.bot .a{color:#e11a2e}
+.app{width:100%;max-width:420px;background:#121212;min-height:100vh;display:flex;flex-direction:column}
+.hdr{padding:14px 16px;background:#171717;display:flex;gap:12px;align-items:center;border-bottom:1px solid #222;color:#fff}
+.hdr a{color:#888;text-decoration:none}
+.box{margin:12px 16px;background:#1e1e1e;padding:14px;border-radius:14px;border:1px solid #2a2a2a}
+.lb{color:#888;font-size:12px;margin-bottom:6px;display:block}
+.inp{width:100%;background:#121212;border:1px solid #333;color:#fff;padding:12px;border-radius:10px;outline:none;font-size:14px;margin-bottom:12px}
+.inp::placeholder{color:#555}
+.pl-row{display:flex;gap:8px;margin-bottom:10px}
+.pl-row .inp{margin-bottom:0;flex:1}
+.del{width:48px;background:#2a1e1e;border:1px solid #333;border-radius:10px;color:#ff4d4d;cursor:pointer}
+.add{width:100%;background:transparent;border:1px dashed #333;color:#00d95f;padding:12px;border-radius:10px;cursor:pointer;font-weight:700}
+.title{color:#fff;font-size:18px;font-weight:800;margin-bottom:12px}
+.start{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:420px;height:58px;background:#e11a2e;border:none;color:#fff;font-size:18px;font-weight:800;cursor:pointer;z-index:10}
+.content{padding-bottom:70px;flex:1}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="content">
 <div class="hdr">
-<div class="logo"><div class="sh">AC</div>Ayaan Cric</div>
-<button class="out" onclick="doOut()">OUT</button>
+<a href="index.html">← Back</a>
+<b>Start New Match</b>
 </div>
-<div class="hello">
-<h2>Hello, Ayaan 👋</h2>
-<p id="ph">👤 01856262395</p>
+<div class="content">
+<div class="box">
+<span class="lb">Team A Name</span>
+<input class="inp" id="teamA" placeholder="Enter Team A Name" value="">
+<span class="lb">Team B Name</span>
+<input class="inp" id="teamB" placeholder="Enter Team B Name" value="">
 </div>
-<div class="card">
-<div class="live">● LIVE</div>
-<div class="match">Ayaan XI vs Friends XI</div>
-<div class="score">32/1 • Need 45 runs • 2.3 overs</div>
+
+<div class="box">
+<div class="title" id="teamATitle">Team A Players</div>
+<div id="teamAPlayers">
+<div class="pl-row"><input class="inp" placeholder="Player 1" value=""><button class="del" onclick="this.parentElement.remove()">x</button></div>
+<div class="pl-row"><input class="inp" placeholder="Player 2" value=""><button class="del" onclick="this.parentElement.remove()">x</button></div>
+<div class="pl-row"><input class="inp" placeholder="Player 3" value=""><button class="del" onclick="this.parentElement.remove()">x</button></div>
+<div class="pl-row"><input class="inp" placeholder="Player 4" value=""><button class="del" onclick="this.parentElement.remove()">x</button></div>
+<div class="pl-row"><input class="inp" placeholder="Player 5" value=""><button class="del" onclick="this.parentElement.remove()">x</button></div>
 </div>
-<div class="grid">
-<div class="box b1" onclick="location.href='start-match.html'">
-<span class="icon">🏏</span>
-<div class="title">Start Match</div>
-<div class="sub">Begin new match</div>
+<button class="add" onclick="addPlayer('teamAPlayers')">+ Add Player to Team A</button>
 </div>
-<div class="box b2" onclick="location.href='scoring.html'">
-<span class="icon">✏️</span>
-<div class="title">Scoring</div>
-<div class="sub">Ball-by-ball</div>
+
+<div class="box">
+<div class="title" id="teamBTitle">Team B Players</div>
+<div id="teamBPlayers">
+<div class="pl-row"><input class="inp" placeholder="Player 1" value=""><button class="del" onclick="this.parentElement.remove()">x</button></div>
+<div class="pl-row"><input class="inp" placeholder="Player 2" value=""><button class="del" onclick="this.parentElement.remove()">x</button></div>
+<div class="pl-row"><input class="inp" placeholder="Player 3" value=""><button class="del" onclick="this.parentElement.remove()">x</button></div>
+<div class="pl-row"><input class="inp" placeholder="Player 4" value=""><button class="del" onclick="this.parentElement.remove()">x</button></div>
+<div class="pl-row"><input class="inp" placeholder="Player 5" value=""><button class="del" onclick="this.parentElement.remove()">x</button></div>
 </div>
-<div class="box b3" onclick="location.href='scorecard.html'">
-<span class="icon">📊</span>
-<div class="title">Scorecard</div>
-<div class="sub">View stats</div>
-</div>
-<div class="box b4">
-<span class="icon">👥</span>
-<div class="title">My Teams</div>
-<div class="sub">Manage squads</div>
-</div>
-</div>
-</div>
-<div class="bot">
-<div class="a">🏠<br>Home</div>
-<div>👑<br>Pro</div>
-<div>🏏<br>Cricket</div>
-<div>🔴<br>Live</div>
-<div>🔭<br>Look</div>
+<button class="add" onclick="addPlayer('teamBPlayers')">+ Add Player to Team B</button>
 </div>
 </div>
+<button class="start" onclick="startMatch()">Start Match →</button>
+</div>
+
 <script>
-if(localStorage.getItem('ayaan_logged')!='yes'){location.href='login.html';}
-var p=localStorage.getItem('ayaan_phone')||'01856262395';
-document.getElementById('ph').innerText='👤 '+p;
-function doOut(){if(confirm('Sign Out?')){localStorage.clear();location.href='login.html';}}
-</script>
-</body>
-</html>
+function addPlayer(id){
+ let d=document.getElementById(id);
+ let c=d.children.length+1;
+ let row=document.createElement('div');
+ row.className='pl-row';
+ row.innerHTML=`<input class="inp" placeholder="Player ${c}" value=""><button class="del" onclick="this
