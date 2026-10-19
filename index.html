@@ -1,17 +1,97 @@
-<!-- Sign Out - Added without changing design -->
-<div style="position:fixed;bottom:20px;right:20px;z-index:999">
-  <button onclick="signOut()" style="background:#e11a2e;color:white;border:none;padding:12px 20px;border-radius:25px;font-weight:700;box-shadow:0 4px 12px rgba(0,0,0,0.5)">Sign Out</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayaan Cric</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',system-ui}
+body{background:#0c0c0c;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;background:#0c0c0c;min-height:100vh;padding:18px 16px 100px;position:relative}
+.header{display:flex;align-items:center;justify-content:space-between;margin:8px 0 22px}
+.logo{display:flex;align-items:center;gap:10px}
+.shield{width:52px;height:52px;background:transparent;border:2px solid #e11a2e;border-radius:12px 12px 18px 18px;display:flex;align-items:center;justify-content:center;position:relative}
+.shield::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:20px;height:10px;background:#0c0c0c}
+.shield b{color:#e11a2e;font-size:26px;font-weight:900;letter-spacing:-1px}
+.header h1{color:#fff;font-size:28px;font-weight:800;letter-spacing:-0.5px}
+.icons{display:flex;gap:12px}
+.icon{width:36px;height:36px;background:#1e1e1e;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#8a8a8a;font-size:18px}
+.hello{margin:6px 0 2px}
+.hello h2{color:#fff;font-size:30px;font-weight:800}
+.hello p{color:#8a8a8a;font-size:16px;margin-top:6px}
+.live{margin:18px 0;background:linear-gradient(180deg,#1a1212,#140d0d);border:1.5px solid #e11a2e;border-radius:14px;padding:14px 12px 14px;text-align:center}
+.live-top{display:flex;justify-content:center;align-items:center;gap:8px;color:#e11a2e;font-weight:700;font-size:13px;letter-spacing:1px}
+.live-badge{background:#e11a2e;color:#fff;padding:2px 8px;border-radius:6px;font-size:11px}
+.vs{display:flex;justify-content:center;gap:24px;margin:16px 0 10px;font-weight:800;color:#fff;font-size:17px}
+.vs span:nth-child(2){color:#6a6a6a}
+.live-sub{color:#8a8a8a;font-size:13px;margin-bottom:14px}
+.btn-live{background:#e11a2e;color:#fff;border:0;padding:9px 18px;border-radius:8px;font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:6px}
+.section{color:#fff;font-size:20px;font-weight:800;margin:22px 0 12px}
+.quick{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.qcard{background:#171717;border:1px solid #2a2a2a;border-radius:14px;padding:16px 8px;text-align:center}
+.qcard.active{border:1.5px solid #e11a2e}
+.q-icon{font-size:36px;margin-bottom:10px;color:#e11a2e}
+.qcard p{color:#d0d0d0;font-size:12px;font-weight:600;margin-top:4px}
+.activity{background:#171717;border:1px solid #2a2a2a;border-radius:14px;padding:12px 14px;display:flex;gap:12px;align-items:center}
+.activity b{color:#fff;font-size:14px}
+.activity small{color:#8a8a8a;font-size:12px}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:420px;background:#121212;border-top:1px solid #242424;display:flex;justify-content:space-around;padding:10px 0 18px;border-radius:18px 18px 0 0}
+.b-item{text-align:center;color:#6a6a6a;font-size:10px;font-weight:600}
+.b-item.active{color:#e11a2e}
+.b-item .bi{font-size:22px;display:block;margin-bottom:4px}
+a{text-decoration:none;color:inherit}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div class="logo">
+      <div class="shield"><b>AC</b></div>
+      <h1>Ayaan Cric</h1>
+    </div>
+    <div class="icons"><div class="icon">🔔</div><div class="icon">👤</div></div>
+  </div>
+
+  <div class="hello">
+    <h2>Hello, Ayaan 👋</h2>
+    <p>Ready for your next match?</p>
+  </div>
+
+  <div class="live">
+    <div class="live-top">• LIVE MATCH <span class="live-badge">LIVE</span></div>
+    <div class="vs"><span>ROYALS XI</span><span>VS</span><span>KNIGHTS CC</span></div>
+    <div class="live-sub">T20 • Final • 12 overs • 98/4 (12.0)</div>
+    <a href="scoring.html"><button class="btn-live">View Live Scoreboard →</button></a>
+  </div>
+
+  <div class="section">Quick Actions</div>
+  <div class="quick">
+    <a href="start-match.html"><div class="qcard active"><div class="q-icon">🏏</div><p>Start Match</p></div></a>
+    <a href="tournaments.html"><div class="qcard"><div class="q-icon">🏆</div><p>Tournaments</p></div></a>
+    <a href="stats.html"><div class="qcard"><div class="q-icon">📊</div><p>Statistics</p></div></a>
+  </div>
+
+  <div class="section">Recent Activity</div>
+  <div class="activity">
+    <div style="font-size:28px">🏏</div>
+    <div><b>You scored 42 runs vs Eagles XI</b><br><small>Yesterday • Won by 6 wickets</small></div>
+  </div>
 </div>
-<div id="userInfo" style="position:fixed;bottom:20px;left:20px;z-index:999;background:#171717;border:1px solid #333;padding:8px 12px;border-radius:20px;font-size:11px;color:#888"></div>
-<script>
-let phone = localStorage.getItem('ayaan_phone');
+
+<div class="bottom">
+  <div class="b-item active"><span class="bi">🏠</span>Home</div>
+  <div class="b-item"><span class="bi">👑</span>Privilege PRO</div>
+  <div class="b-item"><span class="bi">🏏</span>My Cricket</div>
+  <div class="b-item"><span class="bi">📷</span>Go Live</div>
+  <div class="b-item"><span class="bi">🔭</span>Looking</div>
+</div>
+</bod<script>
 if(localStorage.getItem('ayaan_logged')!=='yes'){location.href='login.html';}
-let info=document.getElementById('userInfo'); if(info) info.innerText='👤 '+ (phone||'Logged in');
-function signOut(){
- if(confirm('Sign out?')){
-  localStorage.removeItem('ayaan_logged');
-  localStorage.removeItem('ayaan_phone');
-  location.href='login.html';
- }
-}
+function signOut(){if(confirm('Sign Out?')){localStorage.removeItem('ayaan_logged');localStorage.removeItem('ayaan_phone');location.href='login.html';}}
+let ph=localStorage.getItem('ayaan_phone'); 
 </script>
+<div style="position:fixed;bottom:70px;right:12px;z-index:99"><button onclick="signOut()" style="background:#e11a2e;color:#fff;border:none;padding:10px 18px;border-radius:22px;font-weight:700;font-size:12px">Sign Out</button></div>
+<div style="position:fixed;bottom:70px;left:12px;z-index:99;background:#1e1e1e;color:#aaa;padding:6px 10px;border-radius:18px;font-size:11px;border:1px solid #333">👤 <span id="ph"></span></div>
+<script>document.getElementById('ph').innerText=localStorage.getItem('ayaan_phone')||'';</script>y>
+</html>
