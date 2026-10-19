@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ayaan Cric - Login</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#000;color:#fff;max-width:480px;margin:0 auto;padding:20px;min-height:100vh}
+.logo{width:72px;height:72px;border:2.5px solid #ff2a3c;border-radius:18px;display:flex;align-items:center;justify-content:center;color:#ff2a3c;font-weight:900;font-size:32px;margin:40px auto 12px}
+h1{text-align:center;font-size:30px}
+p{color:#888;text-align:center;margin:10px 0 32px;font-size:14px}
+input{width:100%;background:#161616;border:1.5px solid #2a2a2a;color:#fff;padding:17px;border-radius:14px;margin:9px 0;font-size:16px;outline:none}
+button{width:100%;background:#ff2a3c;color:#fff;border:none;padding:17px;border-radius:14px;font-size:17px;font-weight:800;margin-top:16px}
+.small{color:#888;text-align:center;margin-top:16px;font-size:13px}
+.success{color:#00e676} .error{color:#ff5252}
+</style>
+</head>
+<body>
+<div class="logo">AC</div>
+<h1>Ayaan Cric</h1>
+<p>🌍 Worldwide Login<br>UAE, KSA, BD, India, PK - All Work!</p>
+<input id="phone" placeholder="Phone: +8801XXXXXXXXX">
+<input id="pass" type="password" placeholder="Password: 1234">
+<button id="btn" onclick="login()">Login / Auto Register</button>
+<div class="small" id="msg">First time auto-register. No OTP needed. Database: nam5</div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyBQDSVdAldQ0m9mC7AtLoeY2q-S8KLuaRA",
+  authDomain: "ayaancric.firebaseapp.com",
+  projectId: "ayaancric",
+  storageBucket: "ayaancric.firebasestorage.app",
+  messagingSenderId: "247271826253",
+  appId: "1:247271826253:web:4521fe60e29e3f922bcd04",
+  measurementId: "G-DY4S13WG4Z"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+window.login = async function(){
+ let phone=document.getElementById('phone').value.trim();
+ let pass=document.getElementById('pass').value.trim();
+ let msg=document.getElementById('msg');
+ let btn=document.getElementById('btn');
+ if(!phone||!pass){msg.innerHTML="<span class='error'>❌ Enter phone & password</span>";return;}
+ btn.disabled=true; msg.innerHTML="⏳ Connecting to nam5...";
+ try{
+  let ref=doc(db,"users",phone);
+  let snap=await getDoc(ref);
+  if(snap.exists()){
+    if(snap.data().password===pass){
+      localStorage.setItem('ayaan_phone',phone);
+      localStorage.setItem('ayaan_logged','yes');
+      msg.innerHTML="<span class='success'>✅ Login Success!</span>";
+      setTimeout(()=>location.href='index.html',900);
+    } else { msg.innerHTML="<span class='error'>❌ Wrong password</span>"; btn.disabled=false; }
+  } else {
+    await setDoc(ref,{phone:phone,password:pass,created:new Date().toISOString()});
+    localStorage.setItem('ayaan_phone',phone);
+    localStorage.setItem('ayaan_logged','yes');
+    msg.innerHTML="<span class='success'>✅ Account Created! Welcome 🏏</span>";
+    setTimeout(()=>location.href='index.html',900);
+  }
+ } catch(e){ msg.innerHTML="<span class='error'>Error: "+e.message+"</span>"; btn.disabled=false; }
+}
+</script>
+</body>
+</html>
