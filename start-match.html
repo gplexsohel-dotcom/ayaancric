@@ -2,58 +2,87 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Start Match</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Start New Match - Ayaan Cric</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
-body{background:#0a0a0a;color:#fff;max-width:480px;margin:0 auto;padding:14px}
-.top{padding:12px 0;display:flex;gap:10px}
-input{width:100%;background:#161616;border:1.5px solid #333;color:#fff;padding:12px;border-radius:10px;margin:6px 0}
-.card{background:#161616;border:1px solid #222;border-radius:16px;padding:14px;margin:12px 0}
-.btn{width:100%;background:#ff2a3c;color:#fff;border:0;padding:14px;border-radius:24px;font-weight:800;font-size:16px;margin-top:10px}
-label{font-size:12px;color:#888}
-b{font-size:14px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#0a0a0a;color:#fff;max-width:480px;margin:auto;padding:14px 14px 90px}
+a{color:#aaa;text-decoration:none}
+.card{background:#161616;border:1px solid #262626;border-radius:18px;padding:14px;margin:14px 0}
+input{background:#0f0f0f;border:1px solid #2a2a2a;color:#fff;padding:14px;border-radius:12px;width:100%;margin:8px 0;font-size:15px}
+h3{margin:6px 0 8px}
+.player-row{display:flex;gap:8px;align-items:center}
+.player-row input{flex:1}
+.del{background:#2a2a2a;border:0;color:#ff4d4d;width:40px;height:48px;border-radius:10px;font-size:18px}
+.add-btn{background:#1f1f1f;border:1px dashed #3a3a3a;color:#00e676;padding:12px;width:100%;border-radius:12px;margin-top:8px;font-weight:700}
+.start-btn{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#ff1a2e;color:#fff;border:0;padding:18px;font-size:18px;font-weight:800}
+label{color:#777;font-size:13px;margin-left:4px}
 </style>
 </head>
 <body>
-<div class="top"><span onclick="location.href='index.html'">← Back</span><b>Start New Match</b></div>
+<a href="index.html">← Back</a> <b style="margin-left:8px">Start New Match</b>
 
 <div class="card">
 <label>Team A Name</label>
-<input id="teamA" value="AYAN XI">
+<input id="teamAName" value="AYAN XI">
 <label>Team B Name</label>
-<input id="teamB" value="Mymensingh Stars">
+<input id="teamBName" value="Mymensingh Stars">
 </div>
 
 <div class="card">
-<b>AYAN XI Players</b>
-<input id="p1" value="Ayaan">
-<input id="p2" value="Sohel">
-<input id="p3" placeholder="Player 3">
-<input id="p4" placeholder="Player 4">
-<input id="p5" placeholder="Player 5">
+<h3 id="titleA">AYAN XI Players</h3>
+<div id="teamAPlayers"></div>
+<button class="add-btn" onclick="addPlayer('A')">+ Add Player to AYAN XI</button>
 </div>
 
 <div class="card">
-<b>Mymensingh Stars Players</b>
-<input id="b1" value="Rahul">
-<input id="b2" placeholder="Player 2">
+<h3 id="titleB">Mymensingh Stars Players</h3>
+<div id="teamBPlayers"></div>
+<button class="add-btn" onclick="addPlayer('B')">+ Add Player to Mymensingh Stars</button>
 </div>
 
-<button class="btn" onclick="start()">Start Match →</button>
+<button class="start-btn" onclick="startMatch()">Start Match →</button>
 
 <script>
-function start(){
- let a=document.getElementById('teamA').value;
- let b=document.getElementById('teamB').value;
- localStorage.setItem('teamA',a);
- localStorage.setItem('teamB',b);
- localStorage.setItem('current_runs','0');
- localStorage.setItem('current_wk','0');
- localStorage.setItem('current_balls','0');
- localStorage.setItem('current_over','[]');
- location.href='scoring.html';
+let countA=0, countB=0;
+function createRow(team, value='', placeholder){
+  const div=document.createElement('div');
+  div.className='player-row';
+  div.innerHTML=`<input placeholder="${placeholder}" value="${value}"><button class="del" onclick="this.parentElement.remove()">×</button>`;
+  return div;
 }
+function addPlayer(team){
+  if(team==='A'){
+    countA++; 
+    document.getElementById('teamAPlayers').appendChild(createRow('A','','Player '+countA));
+  } else {
+    countB++;
+    document.getElementById('teamBPlayers').appendChild(createRow('B','','Player '+countB));
+  }
+}
+function init(){
+  // Team A - start with 2
+  ['Ayaan','Sohel'].forEach((n,i)=>{countA=i+1; document.getElementById('teamAPlayers').appendChild(createRow('A',n,'Player '+(i+1)))});
+  for(let i=0;i<3;i++) addPlayer('A'); // extra empty to show unlimited concept
+  // Team B - start with 1
+  ['Rahul'].forEach((n,i)=>{countB=i+1; document.getElementById('teamBPlayers').appendChild(createRow('B',n,'Player '+(i+1)))});
+  for(let i=0;i<1;i++) addPlayer('B');
+}
+function startMatch(){
+  const getPlayers=(id)=>[...document.getElementById(id).querySelectorAll('input')].map(i=>i.value.trim()).filter(v=>v);
+  const data={
+    teamA: document.getElementById('teamAName').value || 'AYAN XI',
+    teamB: document.getElementById('teamBName').value || 'Mymensingh Stars',
+    playersA: getPlayers('teamAPlayers'),
+    playersB: getPlayers('teamBPlayers')
+  };
+  if(data.playersA.length<2 || data.playersB.length<2){alert('Add at least 2 players per team');return;}
+  localStorage.setItem('ayaan_match',JSON.stringify(data));
+  location.href='scoring.html';
+}
+document.getElementById('teamAName').addEventListener('input',e=>document.getElementById('titleA').innerText=(e.target.value||'Team A')+' Players');
+document.getElementById('teamBName').addEventListener('input',e=>document.getElementById('titleB').innerText=(e.target.value||'Team B')+' Players');
+init();
 </script>
 </body>
 </html>
